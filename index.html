@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notable Scientists</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --background-color: #f9fafb;
+            --card-color: #ffffff;
+            --text-color: #1f2937;
+            --text-secondary: #6b7280;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-container {
+            display: flex;
+            margin: 20px 0;
+        }
+
+        #search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: var(--card-color);
+            border: 1px solid #e5e7eb;
+            border-radius: var(--border-radius);
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .scientists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .scientist-card {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .scientist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .scientist-name {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .scientist-years {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 8px 0;
+        }
+
+        .scientist-field {
+            font-size: 0.9rem;
+            background-color: #e5e7eb;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .scientist-invention {
+            margin-bottom: 15px;
+        }
+
+        .card-footer {
+            padding: 1rem 1.5rem;
+            background-color: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .view-btn {
+            padding: 8px 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .view-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .favorite-btn {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .favorite-btn.active {
+            color: #f59e0b;
+        }
+
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Dark mode toggle */
+        .theme-toggle {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Dark mode */
+        body.dark-mode {
+            --background-color: #1f2937;
+            --card-color: #374151;
+            --text-color: #f9fafb;
+            --text-secondary: #d1d5db;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .scientists-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .scientist-card {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        /* Loading spinner */
+        .loading {
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-flask"></i> Notable Scientists</h1>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search scientists by name, field, or invention...">
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="physics">Physics</button>
+            <button class="filter-btn" data-filter="chemistry">Chemistry</button>
+            <button class="filter-btn" data-filter="biology">Biology</button>
+            <button class="filter-btn" data-filter="mathematics">Mathematics</button>
+            <button class="filter-btn" data-filter="computer-science">Computer Science</button>
+            <button class="filter-btn" data-filter="favorites">Favorites</button>
+        </div>
+
+        <div id="loading" class="loading">
+            <div class="loading-spinner"></div>
+        </div>
+
+        <div id="scientists-grid" class="scientists-grid"></div>
+        
+        <div id="no-results" class="no-results" style="display: none;">
+            No scientists found matching your search criteria.
+        </div>
+        
+        <div id="empty-state" class="empty-state" style="display: none;">
+            <i class="fas fa-search"></i>
+            <p>Failed to load scientists data. Please try again later.</p>
+        </div>
+    </div>
+
+    <script>
+        // Store scientists data globally
+        let allScientists = [];
+        let favorites = JSON.parse(localStorage.getItem('favoriteScientists') || '[]');
+        let currentFilter = 'all';
+        let searchTerm = '';
+
+        // Function to load JSON data with error handling
+        async function loadScientists() {
+            try {
+                document.getElementById('loading').style.display = 'flex';
+                const response = await fetch('data.json');
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+                
+                const data = await response.json();
+                
+                // Enhanced data model - we're adding a field property if it doesn't exist
+                return data.scientists.map(scientist => ({
+                    ...scientist,
+                    field: scientist.field || determineField(scientist.invention)
+                }));
+            } catch (error) {
+                console.error('Error loading scientists:', error);
+                document.getElementById('empty-state').style.display = 'block';
+                return [];
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // Simple function to guess a field based on invention if not provided
+        function determineField(invention) {
+            const lowerInvention = invention.toLowerCase();
+            if (lowerInvention.includes('theory') || lowerInvention.includes('physics') || 
+                lowerInvention.includes('quantum') || lowerInvention.includes('relativity')) {
+                return 'Physics';
+            } else if (lowerInvention.includes('computer') || lowerInvention.includes('algorithm') || 
+                       lowerInvention.includes('programming')) {
+                return 'Computer Science';
+            } else if (lowerInvention.includes('equation') || lowerInvention.includes('theorem') || 
+                      lowerInvention.includes('mathematics')) {
+                return 'Mathematics';
+            } else if (lowerInvention.includes('chemistry') || lowerInvention.includes('element') || 
+                       lowerInvention.includes('compound')) {
+                return 'Chemistry';
+            } else if (lowerInvention.includes('biology') || lowerInvention.includes('evolution') || 
+                      lowerInvention.includes('cell') || lowerInvention.includes('dna')) {
+                return 'Biology';
+            } else {
+                return 'Other';
+            }
+        }
+
+        // Function to display the list of scientists as cards
+        function displayScientists(scientists) {
+            const gridContainer = document.getElementById('scientists-grid');
+            const noResultsElement = document.getElementById('no-results');
+            
+            gridContainer.innerHTML = '';
+            
+            if (scientists.length === 0) {
+                noResultsElement.style.display = 'block';
+                return;
+            }
+            
+            noResultsElement.style.display = 'none';
+            
+            scientists.forEach(scientist => {
+                const isFavorite = favorites.includes(scientist.name);
+                
+                const cardHTML = `
+                    <div class="scientist-card" data-field="${scientist.field.toLowerCase().replace(' ', '-')}">
+                        <div class="card-header">
+                            <h3 class="scientist-name">${scientist.name}</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="scientist-years">${scientist.birthYear || '?'} - ${scientist.deathYear || '?'}</div>
+                            <div class="scientist-field">${scientist.field}</div>
+                            <p class="scientist-invention">${scientist.invention}</p>
+                            ${scientist.biography ? `<p>${scientist.biography.substring(0, 120)}...</p>` : ''}
+                        </div>
+                        <div class="card-footer">
+                            <a href="view.html?name=${encodeURIComponent(scientist.name)}" class="view-btn">View Details</a>
+                            <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-name="${scientist.name}">
+                                <i class="fas fa-star"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                gridContainer.insertAdjacentHTML('beforeend', cardHTML);
+            });
+            
+            // Add event listeners to favorite buttons
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                btn.addEventListener('click', toggleFavorite);
+            });
+        }
+        
+        // Toggle favorite status
+        function toggleFavorite(e) {
+            const scientistName = e.currentTarget.dataset.name;
+            const isFavorite = favorites.includes(scientistName);
+            
+            if (isFavorite) {
+                favorites = favorites.filter(name => name !== scientistName);
+                e.currentTarget.classList.remove('active');
+            } else {
+                favorites.push(scientistName);
+                e.currentTarget.classList.add('active');
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('favoriteScientists', JSON.stringify(favorites));
+            
+            // Re-filter if we're on the favorites view
+            if (currentFilter === 'favorites') {
+                filterScientists();
+            }
+        }
+        
+        // Filter scientists based on current filter and search term
+        function filterScientists() {
+            let filtered = [...allScientists];
+            
+            // Apply search filter
+            if (searchTerm) {
+                const term = searchTerm.toLowerCase();
+                filtered = filtered.filter(scientist => 
+                    scientist.name.toLowerCase().includes(term) || 
+                    scientist.invention.toLowerCase().includes(term) ||
+                    (scientist.field && scientist.field.toLowerCase().includes(term))
+                );
+            }
+            
+            // Apply category filter
+            if (currentFilter !== 'all') {
+                if (currentFilter === 'favorites') {
+                    filtered = filtered.filter(scientist => favorites.includes(scientist.name));
+                } else {
+                    filtered = filtered.filter(scientist => 
+                        scientist.field.toLowerCase().replace(' ', '-') === currentFilter
+                    );
+                }
+            }
+            
+            displayScientists(filtered);
+        }
+        
+        // Handle search input
+        function handleSearch() {
+            searchTerm = document.getElementById('search-input').value;
+            filterScientists();
+        }
+        
+        // Handle filter buttons
+        function handleFilterClick(e) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            e.target.classList.add('active');
+            currentFilter = e.target.dataset.filter;
+            
+            filterScientists();
+        }
+        
+        // Toggle dark mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            
+            const icon = document.querySelector('.theme-toggle i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+        
+        // Initialize the app
+        async function initApp() {
+            // Check for dark mode preference
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+                document.querySelector('.theme-toggle i').classList.remove('fa-moon');
+                document.querySelector('.theme-toggle i').classList.add('fa-sun');
+            }
+            
+            // Load scientists data
+            allScientists = await loadScientists();
+            
+            // Display all scientists initially
+            displayScientists(allScientists);
+            
+            // Set up event listeners
+            document.getElementById('search-input').addEventListener('input', handleSearch);
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', handleFilterClick);
+            });
+            
+            document.getElementById('theme-toggle').addEventListener('click', toggleDarkMode);
+        }
+        
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

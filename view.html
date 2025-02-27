@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientist Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --background-color: #f9fafb;
+            --card-color: #ffffff;
+            --text-color: #1f2937;
+            --text-secondary: #6b7280;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .scientist-meta {
+            margin-top: 5px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .content-container {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-top: 20px;
+            overflow: hidden;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .scientist-profile {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .scientist-profile {
+                flex-direction: row;
+            }
+        }
+
+        .profile-image {
+            flex: 0 0 300px;
+            margin-bottom: 1rem;
+        }
+
+        .profile-image img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            object-fit: cover;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #e5e7eb;
+            border-radius: var(--border-radius);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-secondary);
+        }
+
+        .profile-content {
+            flex: 1;
+        }
+
+        .profile-content p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .scientist-field {
+            display: inline-block;
+            background-color: #e5e7eb;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .action-btn.secondary {
+            background-color: #f3f4f6;
+            color: var(--text-color);
+        }
+
+        .action-btn.secondary:hover {
+            background-color: #e5e7eb;
+        }
+
+        #loading {
+            display: none;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 1rem auto;
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        #error-message {
+            display: none;
+            padding: 2rem;
+            text-align: center;
+            color: #b91c1c;
+        }
+
+        .related-scientists {
+            margin-top: 2rem;
+        }
+
+        .related-scientists h2 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .related-list {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+
+        .related-item {
+            flex: 0 0 200px;
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            transition: var(--transition);
+        }
+
+        .related-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .related-item a {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .related-item h3 {
+            margin: 0 0 5px 0;
+            font-size: 1rem;
+        }
+
+        .related-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .timeline h2 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .timeline-items {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline-items::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 7px;
+            width: 2px;
+            background-color: #e5e7eb;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            width: 16px;
+            height: 16px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            top: 5px;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-content {
+            margin-left: 0.5rem;
+        }
+
+        /* Dark mode */
+        body.dark-mode {
+            --background-color: #1f2937;
+            --card-color: #374151;
+            --text-color: #f9fafb;
+            --text-secondary: #d1d5db;
+        }
+
+        body.dark-mode .scientist-field {
+            background-color: #4b5563;
+            color: white;
+        }
+
+        body.dark-mode .action-btn.secondary {
+            background-color: #4b5563;
+            color: #f9fafb;
+        }
+
+        body.dark-mode .action-btn.secondary:hover {
+            background-color: #6b7280;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .profile-image {
+                flex: 0 0 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i>&nbsp; Back to Scientists</a>
+            <h1 id="scientist-name">Loading...</h1>
+            <div class="scientist-meta" id="scientist-meta"></div>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Loading information from Wikipedia...</div>
+        </div>
+
+        <div id="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            <p>Failed to load scientist information. Please try again later.</p>
+        </div>
+
+        <div id="content-container" class="content-container" style="display: none;">
+            <div class="scientist-profile">
+                <div class="profile-image" id="profile-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-user fa-3x"></i>
+                    </div>
+                </div>
+                <div class="profile-content">
+                    <div id="scientist-field" class="scientist-field"></div>
+                    <div id="wikipedia-content"></div>
+                    
+                    <div class="action-buttons">
+                        <a id="wiki-link" href="#" target="_blank" class="action-btn">
+                            <i class="fas fa-book"></i> Read on Wikipedia
+                        </a>
+                        <button id="favorite-btn" class="action-btn secondary">
+                            <i class="far fa-star"></i> Add to Favorites
+                        </button>
+                        <button id="share-btn" class="action-btn secondary">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline" id="timeline">
+                <h2>Key Milestones</h2>
+                <div class="timeline-items" id="timeline-items">
+                    <!-- Timeline items will be added dynamically -->
+                </div>
+            </div>
+
+            <div class="related-scientists">
+                <h2>Related Scientists</h2>
+                <div class="related-list" id="related-scientists">
+                    <!-- Related scientists will be added dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Store current scientist data
+        let currentScientist = null;
+        let allScientists = [];
+        let favorites = JSON.parse(localStorage.getItem('favoriteScientists') || '[]');
+
+        // Function to get query parameters
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Function to convert Wikipedia extracts to HTML with paragraphs
+        function formatWikipediaText(text) {
+            if (!text) return '';
+            const paragraphs = text.split('\n').filter(p => p.trim() !== '');
+            return paragraphs.map(p => `<p>${p}</p>`).join('');
+        }
+
+        // Function to extract a field from Wikipedia content
+        function guessFieldFromContent(content) {
+            const fields = [
+                { name: 'Physics', keywords: ['physicist', 'physics', 'quantum', 'relativity', 'mechanics'] },
+                { name: 'Chemistry', keywords: ['chemist', 'chemistry', 'element', 'compound', 'molecular'] },
+                { name: 'Biology', keywords: ['biologist', 'biology', 'evolution', 'species', 'genetic', 'cell'] },
+                { name: 'Mathematics', keywords: ['mathematician', 'mathematics', 'theorem', 'equation', 'algebra', 'geometry'] },
+                { name: 'Computer Science', keywords: ['computer', 'algorithm', 'programming', 'computation'] },
+                { name: 'Astronomy', keywords: ['astronomer', 'astronomy', 'planet', 'star', 'galaxy', 'cosmic'] },
+                { name: 'Medicine', keywords: ['physician', 'medicine', 'medical', 'disease', 'treatment', 'patient'] }
+            ];
+
+            const lowerContent = content.toLowerCase();
+            
+            for (const field of fields) {
+                if (field.keywords.some(keyword => lowerContent.includes(keyword))) {
+                    return field.name;
+                }
+            }
+            
+            return 'Science';
+        }
+
+        // Function to generate a timeline from Wikipedia extract
+        function generateTimeline(extract, birthYear, deathYear) {
+            const events = [];
+            
+            // Add birth
+            if (birthYear) {
+                events.push({
+                    year: birthYear,
+                    description: `Born in ${birthYear}`
+                });
+            }
+            
+            // Extract years from text (simple regex for years between 1400-2023)
+            const yearMatches = extract.match(/\b(1[4-9]\d\d|20[0-2]\d)\b/g) || [];
+            const uniqueYears = [...new Set(yearMatches)].sort();
+            
+            // Find context for each year (simplified approach)
+            uniqueYears.forEach(year => {
+                if (year !== birthYear && year !== deathYear) {
+                    const yearIndex = extract.indexOf(year);
+                    if (yearIndex !== -1) {
+                        const sentenceStart = extract.lastIndexOf('.', yearIndex) + 1;
+                        const sentenceEnd = extract.indexOf('.', yearIndex);
+                        if (sentenceEnd !== -1) {
+                            let description = extract.substring(sentenceStart, sentenceEnd + 1).trim();
+                            events.push({
+                                year: year,
+                                description: description
+                            });
+                        }
+                    }
+                }
+            });
+            
+            // Add death
+            if (deathYear) {
+                events.push({
+                    year: deathYear,
+                    description: `Died in ${deathYear}`
+                });
+            }
+            
+            // Sort by year
+            return events.sort((a, b) => a.year - b.year);
+        }
+
+        // Function to fetch data from Wikipedia API
+        async function fetchWikipediaData(scientistName) {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('error-message').style.display = 'none';
+            document.getElementById('content-container').style.display = 'none';
+            
+            try {
+                // First try to get data from our local source
+                const response = await fetch('data.json');
+                const data = await response.json();
+                allScientists = data.scientists;
+                
+                // Find current scientist
+                currentScientist = allScientists.find(s => s.name === scientistName);
+                
+                // Update header info
+                if (currentScientist) {
+                    const years = `${currentScientist.birthYear || '?'} - ${currentScientist.deathYear || '?'}`;
+                    document.getElementById('scientist-meta').textContent = years;
+                    document.getElementById('scientist-field').textContent = currentScientist.field || 'Science';
+                }
+                
+                // Fetch Wikipedia data
+                const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&titles=${encodeURIComponent(scientistName)}&prop=extracts|pageimages&exintro=true&explaintext=true&pithumbsize=500`;
+                const wikiResponse = await fetch(apiUrl);
+                const wikiData = await wikiResponse.json();
+                const pages = wikiData.query.pages;
+                const pageId = Object.keys(pages)[0];
+                const pageData = pages[pageId];
+                
+                // Update favorite button status
+                updateFavoriteButton();
+                
+                if (pageData.extract) {
+                    // Display content
+                    document.getElementById('wikipedia-content').innerHTML = formatWikipediaText(pageData.extract);
+                    
+                    // Update wiki link
+                    const wikiLink = document.getElementById('wiki-link');
+                    wikiLink.href = `https://en.wikipedia.org/?curid=${pageId}`;
+                    
+                    // Update image
+                    if (pageData.thumbnail?.source) {
+                        document.getElementById('profile-image').innerHTML = `
+                            <img src="${pageData.thumbnail.source}" alt="${scientistName}">
+                        `;
+                    }
+                    
+                    // Guess field if not available
+                    if (!currentScientist || !currentScientist.field) {
+                        const field = guessFieldFromContent(pageData.extract);
+                        document.getElementById('scientist-field').textContent = field;
+                    }
+                    
+                    // Generate timeline
+                    const birthYear = currentScientist?.birthYear;
+                    const deathYear = currentScientist?.deathYear;
+                    const timelineEvents = generateTimeline(pageData.extract, birthYear, deathYear);
+                    
+                    if (timelineEvents.length > 0) {
+                        const timelineItems = document.getElementById('timeline-items');
+                        timelineItems.innerHTML = '';
+                        
+                        timelineEvents.forEach(event => {
+                            timelineItems.innerHTML += `
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-date">${event.year}</div>
+                                    <div class="timeline-content">${event.description}</div>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        document.getElementById('timeline').style.display = 'none';
+                    }
+                    
+                    // Find related scientists
+                    findRelatedScientists();
+                    
+                    // Show content
+                    document.getElementById('content-container').style.display = 'block';
+                } else {
+                    document.getElementById('error-message').style.display = 'block';
+                    document.getElementById('error-message').innerHTML = `
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>No information found for ${scientistName}.</p>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error fetching scientist data:', error);
+                document.getElementById('error-message').style.display = 'block';
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        // Find related scientists based on field or time period
+        function findRelatedScientists() {
+            if (!currentScientist || !allScientists || allScientists.length === 0) return;
+            
+            let related = [];
+            
+            // First try to find by same field
+            if (currentScientist.field) {
+                related = allScientists.filter(s => 
+                    s.name !== currentScientist.name && 
+                    s.field === currentScientist.field
+                );
+            }
+            
+            // If not enough, find by time period
+            if (related.length < 3 && currentScientist.birthYear) {
+                const birthYear = parseInt(currentScientist.birthYear);
+                const timeRelated = allScientists.filter(s => 
+                    s.name !== currentScientist.name && 
+                    s.birthYear && 
+                    Math.abs(parseInt(s.birthYear) - birthYear) < 50
+                );
+                
+                // Combine and remove duplicates
+                related = [...new Set([...related, ...timeRelated])];
+            }
+            
+            // Limit to 5 related scientists
+            related = related.slice(0, 5);
+            
+            // Display related scientists
+            if (related.length > 0) {
+                const relatedContainer = document.getElementById('related-scientists');
+                relatedContainer.innerHTML = '';
+                
+                related.forEach(scientist => {
+                    relatedContainer.innerHTML += `
+                        <div class="related-item">
+                            <a href="view.html?name=${encodeURIComponent(scientist.name)}">
+                                <h3>${scientist.name}</h3>
+                                <p>${scientist.field || 'Science'}</p>
+                            </a>
+                        </div>
+                    `;
+                });
+            } else {
+                document.querySelector('.related-scientists').style.display = 'none';
+            }
+        }
+        
+        // Update favorite button based on current status
+        function updateFavoriteButton() {
+            if (!currentScientist) return;
+            
+            const favoriteBtn = document.getElementById('favorite-btn');
+            const isFavorite = favorites.includes(currentScientist.name);
+            
+            if (isFavorite) {
+                favoriteBtn.innerHTML = '<i class="fas fa-star"></i> Remove from Favorites';
+            } else {
+                favoriteBtn.innerHTML = '<i class="far fa-star"></i> Add to Favorites';
+            }
+        }
+        
+        // Toggle favorite status
+        function toggleFavorite() {
+            if (!currentScientist) return;
+            
+            const scientistName = currentScientist.name;
+            const isFavorite = favorites.includes(scientistName);
+            
+            if (isFavorite) {
+                favorites = favorites.filter(name => name !== scientistName);
+            } else {
+                favorites.push(scientistName);
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('favoriteScientists', JSON.stringify(favorites));
+            
+            // Update button
+            updateFavoriteButton();
+        }
+        
+        // Share functionality
+        function shareScientist() {
+            if (!currentScientist) return;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: currentScientist.name,
+                    text: `Check out information about ${currentScientist.name}`,
+                    url: window.location.href
+                })
+                .catch(error => console.log('Error sharing:', error));
+            } else {
+                // Fallback: copy to clipboard
+                const url = window.location.href;
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('Link copied to clipboard!');
+                });
+            }
+        }
+        
+        // Toggle dark mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            
+            const icon = document.querySelector('.theme-toggle i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+
+        // Initialize the page
+        window.onload = function () {
+            // Check for dark mode preference
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+                document.querySelector('.theme-toggle i').classList.remove('fa-moon');
+                document.querySelector('.theme-toggle i').classList.add('fa-sun');
+            }
+            
+            // Set up event listeners
+            document.getElementById('favorite-btn').addEventListener('click', toggleFavorite);
+            document.getElementById('share-btn').addEventListener('click', shareScientist);
+            document.getElementById('theme-toggle').addEventListener('click', toggleDarkMode);
+            
+            // Get scientist name from URL
+            const scientistName = getQueryParam('name');
+            if (scientistName) {
+                document.getElementById('scientist-name').textContent = scientistName;
+                fetchWikipediaData(scientistName);
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+                document.getElementById('error-message').innerHTML = `
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p>No scientist name provided.</p>
+                `;
+            }
+        };
+    </script>
+</body>
+</html>

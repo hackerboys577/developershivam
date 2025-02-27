@@ -1,0 +1,404 @@
+{
+  "scientists": [
+    {
+      "name": "Isaac Newton",
+      "birthYear": 1643,
+      "deathYear": 1727,
+      "invention": "Laws of Motion and Universal Gravitation",
+      "inventionDate": "1687",
+      "image_url": "https://nassau4wlessondb.z21.web.core.windows.net/what-are-newtons-three-laws-of-motion.html"
+    },
+    {
+      "name": "Albert Einstein",
+      "birthYear": 1879,
+      "deathYear": 1955,
+      "invention": "Theory of Relativity",
+      "inventionDate": "1905",
+      "image_url": "https://creativefigment.blogspot.com/2014/03/infographic-einsteins-theory-of.html"
+    },
+    {
+      "name": "Nikola Tesla",
+      "birthYear": 1856,
+      "deathYear": 1943,
+      "invention": "Alternating Current (AC) Electricity System",
+      "inventionDate": "1887",
+      "image_url": "https://nikolatesla-inventor.com/INVENTIONS/index.html"
+    },
+    {
+      "name": "Thomas Edison",
+      "birthYear": 1847,
+      "deathYear": 1931,
+      "invention": "Incandescent Light Bulb",
+      "inventionDate": "1879",
+      "image_url": "https://www.britannica.com/biography/Thomas-Edison"
+    },
+    {
+      "name": "Alexander Graham Bell",
+      "birthYear": 1847,
+      "deathYear": 1922,
+      "invention": "Telephone",
+      "inventionDate": "1876",
+      "image_url": "https://www.alamy.com/alexander-graham-bell-telephone-system-1877-image245870621.html"
+    },
+    {
+      "name": "James Watt",
+      "birthYear": 1736,
+      "deathYear": 1819,
+      "invention": "Improvements to the Steam Engine",
+      "inventionDate": "1765",
+      "image_url": "https://www.britannica.com/biography/James-Watt"
+    },
+    {
+      "name": "Galileo Galilei",
+      "birthYear": 1564,
+      "deathYear": 1642,
+      "invention": "Improved Telescope and Astronomical Observations",
+      "inventionDate": "1609",
+      "image_url": "https://www.britannica.com/biography/Galileo-Galilei"
+    },
+    {
+      "name": "Michael Faraday",
+      "birthYear": 1791,
+      "deathYear": 1867,
+      "invention": "Electromagnetic Induction",
+      "inventionDate": "1831",
+      "image_url": "https://www.britannica.com/biography/Michael-Faraday"
+    },
+    {
+      "name": "Marie Curie",
+      "birthYear": 1867,
+      "deathYear": 1934,
+      "invention": "Discovery of Radium and Polonium",
+      "inventionDate": "1898",
+      "image_url": "https://www.britannica.com/biography/Marie-Curie"
+    },
+    {
+      "name": "Johannes Kepler",
+      "birthYear": 1571,
+      "deathYear": 1630,
+      "invention": "Laws of Planetary Motion",
+      "inventionDate": "1609",
+      "image_url": "https://www.britannica.com/biography/Johannes-Kepler"
+    },
+    {
+      "name": "Guglielmo Marconi",
+      "birthYear": 1874,
+      "deathYear": 1937,
+      "invention": "Wireless Telegraphy (Radio)",
+      "inventionDate": "1895",
+      "image_url": "https://www.britannica.com/biography/Guglielmo-Marconi"
+    },
+    {
+      "name": "Louis Pasteur",
+      "birthYear": 1822,
+      "deathYear": 1895,
+      "invention": "Pasteurization Process",
+      "inventionDate": "1864",
+      "image_url": "https://www.britannica.com/biography/Louis-Pasteur"
+    },
+    {
+      "name": "Antonie van Leeuwenhoek",
+      "birthYear": 1632,
+      "deathYear": 1723,
+      "invention": "Development of the Microscope",
+      "inventionDate": "1674",
+      "image_url": "https://en.wikipedia.org/wiki/File%3ALeeuwenhoek_Microscope.png"
+    },
+    {
+      "name": "Robert Hooke",
+      "birthYear": 1635,
+      "deathYear": 1703,
+      "invention": "Discovery of the Cell",
+      "inventionDate": "1665",
+      "image_url": "https://www.slideserve.com/oral/a-tour-of-the-cell"
+    },
+    {
+      "name": "Alessandro Volta",
+      "birthYear": 1745,
+      "deathYear": 1827,
+      "invention": "Electric Battery (Voltaic Pile)",
+      "inventionDate": "1800",
+      "image_url": "https://virtualtours.musei.unipd.it/itinerary/museo-di-storia-della-fisica/66/relic/volta-column-battery"
+    },
+    {
+      "name": "Joseph Lister",
+      "birthYear": 1827,
+      "deathYear": 1912,
+      "invention": "Antiseptic Surgery",
+      "inventionDate": "1867",
+      "image_url": "https://www.britannica.com/biography/Joseph-Lister-Baron-Lister-of-Lyme-Regis"
+    },
+    {
+      "name": "Dmitri Mendeleev",
+      "birthYear": 1834,
+      "deathYear": 1907,
+      "invention": "Periodic Table of Elements",
+      "inventionDate": "1869",
+      "image_url": "https://www.britannica.com/biography/Dmitri-Mendeleev"
+    },
+    {
+      "name": "Wilhelm Roentgen",
+      "birthYear": 1845,
+      "deathYear": 1923,
+      "invention": "Discovery of X-Rays",
+      "inventionDate": "1895",
+      "image_url": "https://www.britannica.com/biography/Wilhelm-Conrad-Rontgen"
+    },
+    {
+      "name": "Enrico Fermi",
+      "birthYear": 1901,
+      "deathYear": 1954,
+      "invention": "First Nuclear Reactor",
+      "inventionDate": "1942",
+      "image_url": "https://www.britannica.com/biography/Enrico-Fermi"
+    },
+    {
+      "name": "Edwin Hubble",
+      "birthYear": 1889,
+      "deathYear": 1953,
+      "invention": "Expanding Universe Theory",
+      "inventionDate": "1929",
+      "image_url": "https://www.britannica.com/biography/Edwin-Hubble"
+    },
+    {
+      "name": "Max Planck",
+      "birthYear": 1858,
+      "deathYear": 1947,
+      "invention": "Quantum Theory",
+      "inventionDate": "1900",
+      "image_url": "https://www.britannica.com/biography/Max-Planck"
+    },
+    {
+      "name": "Niels Bohr",
+      "birthYear": 1885,
+      "deathYear": 1962,
+      "invention": "Bohr Model of the Atom",
+      "inventionDate": "1913",
+      "image_url": "https://www.britannica.com/biography/Niels-Bohr"
+    },
+    {
+      "name": "Richard Feynman",
+      "birthYear": 1918,
+      "deathYear": 1988,
+      "invention": "Quantum Electrodynamics",
+      "inventionDate": "1948",
+      "image_url": "https://www.britannica.com/biography/Richard-Feynman"
+    },
+    {
+      "name": "Leonardo da Vinci",
+      "birthYear": 1452,
+      "deathYear": 1519,
+      "invention": "Designs of Flying Machines",
+      "inventionDate": "c. 1485",
+      "image_url": "https://www.britannica.com/biography/Leonardo-da-Vinci"
+    },
+    {
+      "name": "John Dalton",
+      "birthYear": 1766,
+      "deathYear": 1844,
+      "invention": "Atomic Theory",
+      "inventionDate": "1808",
+      "image_url": "https://www.britannica.com/biography/John-Dalton"
+    },
+    {
+      "name": "Gregor Mendel",
+      "birthYear": 1822,
+      "deathYear": 1884,
+      "invention": "Laws of Inheritance (Genetics)",
+      "inventionDate": "1865",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/45/Mendel_F_1860.jpg"
+    },
+    {
+      "name": "Francis Crick & James Watson",
+      "birthYear": "N/A",
+      "deathYear": "N/A",
+      "invention": "DNA Double Helix Structure",
+      "inventionDate": "1953",
+      "image_url": "https://www.nobelprize.org/images/crick_watson_dna_250px.jpg"
+    },
+    {
+      "name": "Erwin Schrödinger",
+      "birthYear": 1887,
+      "deathYear": 1961,
+      "invention": "Schrödinger Equation",
+      "inventionDate": "1926",
+      "image_url": "https://www.britannica.com/biography/Erwin-Schrodinger"
+    },
+    {
+      "name": "Blaise Pascal",
+      "birthYear": 1623,
+      "deathYear": 1662,
+      "invention": "Pascal’s Triangle, Hydraulic Press",
+      "inventionDate": "1654",
+      "image_url": "https://www.britannica.com/biography/Blaise-Pascal"
+    },
+    {
+      "name": "Rudolf Diesel",
+      "birthYear": 1858,
+      "deathYear": 1913,
+      "invention": "Diesel Engine",
+      "inventionDate": "1893",
+      "image_url": "https://www.britannica.com/biography/Rudolf-Diesel"
+    },
+    {
+      "name": "Hedy Lamarr",
+      "birthYear": 1914,
+      "deathYear": 2000,
+      "invention": "Frequency-Hopping Spread Spectrum",
+      "inventionDate": "1942",
+      "image_url": "https://www.invent.org/sites/default/files/styles/inductee_detail_media/public/hedy-lamarr.jpg"
+    },
+    {
+      "name": "Tim Berners-Lee",
+      "birthYear": 1955,
+      "deathYear": null,
+      "invention": "World Wide Web",
+      "inventionDate": "1989",
+      "image_url": "https://www.w3.org/People/Berners-Lee/WorldWideWeb.html"
+    },
+    {
+      "name": "Alan Turing",
+      "birthYear": 1912,
+      "deathYear": 1954,
+      "invention": "Turing Machine Concept",
+      "inventionDate": "1936",
+      "image_url": "https://www.britannica.com/biography/Alan-Turing"
+    },
+    {
+      "name": "Stephen Hawking",
+      "birthYear": 1942,
+      "deathYear": 2018,
+      "invention": "Hawking Radiation Theory",
+      "inventionDate": "1974",
+      "image_url": "https://www.hawking.org.uk/hawking-radiation"
+    },
+    {
+      "name": "Leonhard Euler",
+      "birthYear": 1707,
+      "deathYear": 1783,
+      "invention": "Graph Theory and Mathematical Notation",
+      "inventionDate": "1736",
+      "image_url": "https://www.britannica.com/biography/Leonhard-Euler"
+    },
+    {
+      "name": "James Clerk Maxwell",
+      "birthYear": 1831,
+      "deathYear": 1879,
+      "invention": "Electromagnetic Wave Theory",
+      "inventionDate": "1865",
+      "image_url": "https://www.britannica.com/biography/James-Clerk-Maxwell"
+    },
+    {
+      "name": "Pierre Curie",
+      "birthYear": 1859,
+      "deathYear": 1906,
+      "invention": "Discovery of Piezoelectricity",
+      "inventionDate": "1880",
+      "image_url": "https://www.britannica.com/biography/Pierre-Curie"
+    },
+    {
+      "name": "Frederick Banting",
+      "birthYear": 1891,
+      "deathYear": 1941,
+      "invention": "Discovery of Insulin",
+      "inventionDate": "1921",
+      "image_url": "https://www.britannica.com/biography/Frederick-Banting"
+    },
+    {
+      "name": "Rosalind Franklin",
+      "birthYear": 1920,
+      "deathYear": 1958,
+      "invention": "X-ray Diffraction Images of DNA",
+      "inventionDate": "1952",
+      "image_url": "https://www.nature.com/scitable/content/rosalind-franklin-and-dna-24775/"
+    },
+    {
+      "name": "Barbara McClintock",
+      "birthYear": 1902,
+      "deathYear": 1992,
+      "invention": "Discovery of Transposons (Jumping Genes)",
+      "inventionDate": "1950",
+      "image_url": "https://www.nobelprize.org/prizes/medicine/1983/mcclintock/biographical/"
+    },
+    {
+      "name": "Benjamin Franklin",
+      "birthYear": 1706,
+      "deathYear": 1790,
+      "invention": "Lightning Rod",
+      "inventionDate": "1752",
+      "image_url": "https://www.britannica.com/biography/Benjamin-Franklin"
+    },
+    {
+      "name": "Ernest Rutherford",
+      "birthYear": 1871,
+      "deathYear": 1937,
+      "invention": "Nuclear Model of the Atom",
+      "inventionDate": "1911",
+      "image_url": "https://www.britannica.com/biography/Ernest-Rutherford"
+    },
+    {
+      "name": "Lise Meitner",
+      "birthYear": 1878,
+      "deathYear": 1968,
+      "invention": "Discovery of Nuclear Fission",
+      "inventionDate": "1938",
+      "image_url": "https://www.britannica.com/biography/Lise-Meitner"
+    },
+    {
+      "name": "Subrahmanyan Chandrasekhar",
+      "birthYear": 1910,
+      "deathYear": 1995,
+      "invention": "Chandrasekhar Limit (Astrophysics)",
+      "inventionDate": "1930",
+      "image_url": "https://www.nobelprize.org/prizes/physics/1983/chandrasekhar/biographical/"
+    },
+    {
+      "name": "J. Robert Oppenheimer",
+      "birthYear": 1904,
+      "deathYear": 1967,
+      "invention": "Leadership of the Manhattan Project (Nuclear Bomb)",
+      "inventionDate": "1942–1945",
+      "image_url": "https://www.britannica.com/biography/J-Robert-Oppenheimer"
+    },
+    {
+      "name": "John von Neumann",
+      "birthYear": 1903,
+      "deathYear": 1957,
+      "invention": "Development of Game Theory, Modern Computing Architecture",
+      "inventionDate": "1944",
+      "image_url": "https://www.britannica.com/biography/John-von-Neumann"
+    },
+    {
+      "name": "Carl Linnaeus",
+      "birthYear": 1707,
+      "deathYear": 1778,
+      "invention": "Binomial Nomenclature (Taxonomy)",
+      "inventionDate": "1735",
+      "image_url": "https://www.britannica.com/biography/Carl-Linnaeus"
+    },
+    {
+      "name": "Alfred Nobel",
+      "birthYear": 1833,
+      "deathYear": 1896,
+      "invention": "Invention of Dynamite",
+      "inventionDate": "1867",
+      "image_url": "https://www.britannica.com/biography/Alfred-Nobel"
+    },
+    {
+      "name": "Daniel Bernoulli",
+      "birthYear": 1700,
+      "deathYear": 1782,
+      "invention": "Bernoulli's Principle (Fluid Dynamics)",
+      "inventionDate": "1738",
+      "image_url": "https://www.britannica.com/biography/Daniel-Bernoulli"
+    },
+    {
+      "name": "André-Marie Ampère",
+      "birthYear": 1775,
+      "deathYear": 1836,
+      "invention": "Foundations of Electromagnetism",
+      "inventionDate": "1820",
+      "image_url": "https://www.britannica.com/biography/Andre-Marie-Ampere"
+    }
+  ]
+}
